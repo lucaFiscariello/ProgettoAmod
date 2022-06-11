@@ -46,28 +46,21 @@ Verrà utilizzato python sfruttando l’API offerta da Gurobi.
 Classi da creare
 
 - Classe che modella problema di facility location capacitato
-il costruttore riceve come parametri vettori contenenti il costo di setup, e allocazione(trasporto) , la domanda e la capacità dei centri
-metodo che restituisce vincoli del problema
-
 
 - Classe che modella problema di facility location capacitato
-il costruttore riceve come parametri vettori contenenti il costo di setup, e allocazione(trasporto) 
-metodo che restituisce vincoli del problema
+
+- Classe Solver che prevede una serie di metodi:
+  1. metodo per calcolare soluzione ottima
+  2. metodo per calcolare lower  bound 1
+  3. metodo per calcolare lower  bound 2
+  4. metodo che implementa l’ascesa duale
 
 
-- classe Solver che prevede una serie di metodi che restituiscono : tempo di esecuzione e soluzione ottima (o bound). I metodi sono: 
-costruttore che riceve in ingresso la classe che modella il problema
-1. metodo per calcolare soluzione ottima
-2. metodo per calcolare lower  bound 1
-3. metodo per calcolare lower  bound 2
-4. metodo che implementa l’ascesa duale
-
-
-- classe ParamGenerator che prevede una serie di metodi che accettano in ingresso la dimensione della lista che devono generare
-1. metodo per generare la lista dei parametri dei costi di setup
-2. metodo per generare la lista dei parametri dei costi di allocazione
-3. metodo per generare la lista dei parametri della domanda dei clienti
-4. metodo per generare la lista dei parametri della capacità dei centri 
+- Classe ParamGenerator che prevede una serie di metodi che accettano in ingresso la dimensione della lista che devono generare:
+  1. metodo per generare la lista dei parametri dei costi di setup
+  2. metodo per generare la lista dei parametri dei costi di allocazione
+  3. metodo per generare la lista dei parametri della domanda dei clienti
+  4. metodo per generare la lista dei parametri della capacità dei centri 
 
 
 ## Informazioni utili
