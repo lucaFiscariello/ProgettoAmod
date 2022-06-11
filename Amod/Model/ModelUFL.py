@@ -32,7 +32,7 @@ class ModelUFL:
         # yuv<=xu
         m.addConstrs((x[u]-y[u, v] >= 0 for u in facility for v in clients), "Continuity")
 
-        m.write('facilityUFL.lp')
+        m.write('Formulation/facilityUFL.lp')
         self.model = m
 
     def get_model(self):
@@ -63,7 +63,7 @@ class ModelUFL:
         # Sommatoria su u (yuv) == 1
         m_lgr.addConstrs((y.sum('*', v )== 1 for v in clients), "Demand")
 
-        m_lgr.write('facilityUFL_lagrange.lp')
+        m_lgr.write('Formulation/facilityUFL_lagrange.lp')
         return m_lgr
 
     def get_param_dual(self):

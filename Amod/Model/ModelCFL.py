@@ -34,7 +34,7 @@ class ModelCFL:
         # Sommatoria su u (yuv) == 1
         m.addConstrs((y.sum('*', v) == 1 for v in clients), "Demand")
 
-        m.write('facilityCFL.lp')
+        m.write('Formulation/facilityCFL.lp')
         self.model = m
 
     def get_model(self):
@@ -65,12 +65,10 @@ class ModelCFL:
         # Sommatoria su u (yuv) == 1
         m_lgr.addConstrs((y.sum('*', v )== 1 for v in clients), "Demand")
 
-        m_lgr.write('facilityUFL_lagrange.lp')
+        m_lgr.write('Formulation/facilityCFL_lagrange.lp')
         return m_lgr
 
     def get_param_dual(self):
-        l = []
-        g = []
         c = []
         f = self.setup_costs
         k = self.capacity
@@ -87,7 +85,7 @@ class ModelCFL:
 
         c.append(tmp)
 
-        return l, g, c, f, k, d
+        return c, f, k, d
 
 
 
