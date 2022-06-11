@@ -8,13 +8,13 @@ Problemi da analizzare
 
 
 Obiettivi
--Per entrambi i problemi si calcola la soluzione ottima e la si confronta con  2 lower  bound ottenuti con tecniche diverse e con una soluzione euristica ottenuta con l’algoritmo di ascesa duale.
+- Per entrambi i problemi si calcola la soluzione ottima e la si confronta con  2 lower  bound ottenuti con tecniche diverse e con una soluzione euristica ottenuta con l’algoritmo di ascesa duale.
 - In più si vuole osservare quale è il più grande problema che riesce a risolvere in x minuti (da stabilire ancora) per ciascuna delle 8 versioni del problema(capacitato-pli , capacitato rilassato , capacitato-ascesa duale .. ecc)
 
 
 I lower  bound sono  individuati con 
--rilassamento lineare
--rilassamento lagrangiano ( si provano più valori del moltiplicatore )
+- rilassamento lineare
+- rilassamento lagrangiano ( si provano più valori del moltiplicatore )
  
  
 Il confronto tra le soluzione individuate con le varie tecniche riguarda
