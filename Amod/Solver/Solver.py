@@ -1,6 +1,5 @@
 from Util.ChronoMeter import ChronoMeter
 
-
 def get_optimal(fl):
     chrono = ChronoMeter()
     model = fl.get_model()
@@ -136,3 +135,4 @@ def get_ascent_dual_CFL(fl):
     execution_time = chrono.get_execution_time()
 
     return solution_optimal, execution_time
+
