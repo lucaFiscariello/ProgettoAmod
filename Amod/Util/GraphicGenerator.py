@@ -27,41 +27,61 @@ class GraphicGenerator:
 
     def plot_boxplot_solution_ufl(self):
         filter_dataset = self.dataset_ufl[['solutions opt', 'solutions linear', 'solutions lagrange', 'solutions ascent']]
-        fig = plt.figure(figsize=[10, 15])
-        filter_dataset.boxplot(rot=90)
+        filter_dataset = filter_dataset.copy()
+        filter_dataset.rename(
+            columns={'solutions opt': 'opt', 'solutions linear': 'linear', 'solutions lagrange': 'lagrange',
+                     'solutions ascent': 'AAD'}, inplace=True)
 
-        plt.ylabel("Costi complessivi")
-        plt.title("Andamento costi complessivi con problema di dimensione fissata")
+        fig = plt.figure(figsize=[10, 15])
+        filter_dataset.boxplot(rot=45, fontsize=17)
+
+        plt.ylabel("Costi complessivi", fontsize=20)
+        plt.title("Andamento costi",fontsize=20)
 
         fig.savefig("Img/UFL/box_plot_solution.png", format="png")
 
     def plot_boxplot_time_ufl(self):
         filter_dataset = self.dataset_ufl[['times opt', 'times linear', 'times lagrange', 'times ascent']]
-        fig = plt.figure(figsize=[10, 15])
-        filter_dataset.boxplot(rot=90)
+        filter_dataset = filter_dataset.copy()
+        filter_dataset.rename(
+            columns={'times opt': 'opt', 'times linear': 'linear', 'times lagrange': 'lagrange',
+                     'times ascent': 'AAD'}, inplace=True)
 
-        plt.ylabel("Tempo esecuzione")
-        plt.title("Andamento tempi esecuzione con problema di dimensione fissata")
+        fig = plt.figure(figsize=[10, 15])
+        filter_dataset.boxplot(rot=45, fontsize=17)
+
+        plt.ylabel("Tempo esecuzione", fontsize=20)
+        plt.title("Andamento tempi", fontsize=20)
 
         fig.savefig("Img/UFL/box_plot_time.png", format="png")
 
     def plot_boxplot_solution_cfl(self):
         filter_dataset = self.dataset_cfl[['solutions opt', 'solutions linear', 'solutions lagrange', 'solutions ascent']]
-        fig = plt.figure(figsize=[10, 15])
-        filter_dataset.boxplot(rot=90)
+        filter_dataset = filter_dataset.copy()
+        filter_dataset.rename(
+            columns={'solutions opt': 'opt', 'solutions linear': 'linear', 'solutions lagrange': 'lagrange',
+                     'solutions ascent': 'AAD'}, inplace=True)
 
-        plt.ylabel("Costi complessivi")
-        plt.title("Andamento costi complessivi con problema di dimensione fissata")
+        fig = plt.figure(figsize=[10, 15])
+        filter_dataset.boxplot(rot=45, fontsize=17)
+
+        plt.ylabel("Costi complessivi",fontsize=20)
+        plt.title("Andamento costi", fontsize=20)
 
         fig.savefig("Img/CFL/box_plot_solution.png", format="png")
 
     def plot_boxplot_time_cfl(self):
         filter_dataset = self.dataset_cfl[['times opt', 'times linear', 'times lagrange', 'times ascent']]
-        fig = plt.figure(figsize=[10, 15])
-        filter_dataset.boxplot(rot=90)
+        filter_dataset = filter_dataset.copy()
+        filter_dataset.rename(
+            columns={'times opt': 'opt', 'times linear': 'linear', 'times lagrange': 'lagrange',
+                     'times ascent': 'AAD'}, inplace=True)
 
-        plt.ylabel("Tempo esecuzione")
-        plt.title("Andamento tempi esecuzione con problema di dimensione fissata")
+        fig = plt.figure(figsize=[10, 15])
+        filter_dataset.boxplot(rot=45, fontsize=17)
+
+        plt.ylabel("Tempo esecuzione",fontsize=20)
+        plt.title("Andamento tempi", fontsize=20)
 
         fig.savefig("Img/CFL/box_plot_time.png", format="png")
 
@@ -72,11 +92,11 @@ class GraphicGenerator:
         plt.plot(dataset['dimention'], dataset['solutions linear'], label= "linear")
         plt.plot(dataset['dimention'], dataset['solutions lgr'], label="lagrange")
 
-        plt.xlabel("Variabili decisionali")
-        plt.ylabel("Costi complessivi")
-        plt.title("Andamento soluzione ottima e rilassamenti")
+        plt.xlabel("Variabili decisionali",fontsize=20)
+        plt.ylabel("Costi complessivi",fontsize=20)
+        plt.title("Confronto ottimo e rilassamenti",fontsize=20)
         plt.grid()
-        plt.legend()
+        plt.legend(fontsize=15)
 
         fig.savefig("Img/UFL/line_plot_solution.png", format="png")
 
@@ -86,11 +106,11 @@ class GraphicGenerator:
         plt.plot(dataset['dimention'], dataset['solutions opt'], label="optimal")
         plt.plot(dataset['dimention'], dataset['solutions asc'], label="dual ascent")
 
-        plt.xlabel("Variabili decisionali")
-        plt.ylabel("Costi complessivi")
-        plt.title("Confronto AAD-PLI")
+        plt.xlabel("Variabili decisionali",fontsize=20)
+        plt.ylabel("Costi complessivi",fontsize=20)
+        plt.title("Confronto AAD-PLI",fontsize=20)
         plt.grid()
-        plt.legend()
+        plt.legend(fontsize=15)
 
         fig.savefig("Img/UFL/plot_lineplot_ascent.png", format="png")
 
@@ -104,11 +124,11 @@ class GraphicGenerator:
         plt.scatter(dataset['dimention'], dataset['times lgr'], label="lagrange", s=area ,alpha=0.5)
         plt.scatter(dataset['dimention'], dataset['times linear'], label="linear", s=area ,alpha=0.5)
 
-        plt.xlabel("Variabili decisionali")
-        plt.ylabel("Tempi esecuzione")
-        plt.title("Confronto tempi esecuzione")
+        plt.xlabel("Variabili decisionali",fontsize=20)
+        plt.ylabel("Tempi esecuzione",fontsize=20)
+        plt.title("Confronto tempi esecuzione",fontsize=20)
         plt.grid()
-        plt.legend(fontsize=16)
+        plt.legend(fontsize=15)
 
         fig.savefig("Img/UFL/plot_lineplot_time.png", format="png")
 
@@ -129,10 +149,10 @@ class GraphicGenerator:
         plt.scatter(dataset['dimention'],error_linear, label = "lineare", s=100)
         plt.scatter(dataset['dimention'],error_asc, label = "ascesa duale", s=150)
 
-        plt.xlabel("Variabili decisionali")
-        plt.ylabel("Errori relativi")
-        plt.title("Errori commessi")
-        plt.legend()
+        plt.xlabel("Variabili decisionali",fontsize=20)
+        plt.ylabel("Errori relativi",fontsize=20)
+        plt.title("Errori commessi", fontsize=20)
+        plt.legend(fontsize=15)
         plt.grid()
 
         fig.savefig("Img/UFL/plot_error.png", format="png")
@@ -144,11 +164,11 @@ class GraphicGenerator:
         plt.plot(dataset['dimention'], dataset['solutions linear'], label= "linear")
         plt.plot(dataset['dimention'], dataset['solutions lgr'], label="lagrange")
 
-        plt.xlabel("Variabili decisionali")
-        plt.ylabel("Costi complessivi")
-        plt.title("Andamento soluzione ottima e rilassamenti")
+        plt.xlabel("Variabili decisionali",fontsize=20)
+        plt.ylabel("Costi complessivi",fontsize=20)
+        plt.title("Andamento ottimo e rilassamenti", fontsize=20)
         plt.grid()
-        plt.legend()
+        plt.legend(fontsize=15)
 
         fig.savefig("Img/CFL/line_plot_solution.png", format="png")
 
@@ -158,11 +178,11 @@ class GraphicGenerator:
         plt.plot(dataset['dimention'], dataset['solutions opt'], label="optimal")
         plt.plot(dataset['dimention'], dataset['solutions asc'], label="dual ascent")
 
-        plt.xlabel("Variabili decisionali")
-        plt.ylabel("Costi complessivi")
-        plt.title("Confronto AAD-PLI")
+        plt.xlabel("Variabili decisionali",fontsize=20)
+        plt.ylabel("Costi complessivi",fontsize=20)
+        plt.title("Confronto AAD-PLI", fontsize=20)
         plt.grid()
-        plt.legend()
+        plt.legend(fontsize=15)
 
         fig.savefig("Img/CFL/plot_lineplot_ascent.png", format="png")
 
@@ -176,11 +196,11 @@ class GraphicGenerator:
         plt.scatter(dataset['dimention'], dataset['times lgr'], label="lagrange", s=area ,alpha=0.5)
         plt.scatter(dataset['dimention'], dataset['times linear'], label="linear", s=area ,alpha=0.5)
 
-        plt.xlabel("Variabili decisionali")
-        plt.ylabel("Tempi esecuzione")
-        plt.title("Confronto tempi esecuzione")
+        plt.xlabel("Variabili decisionali",fontsize=20)
+        plt.ylabel("Tempi esecuzione",fontsize=20)
+        plt.title("Confronto tempi esecuzione",fontsize=20)
         plt.grid()
-        plt.legend(fontsize=16)
+        plt.legend(fontsize=15)
 
         fig.savefig("Img/CFL/plot_lineplot_time.png", format="png")
 
@@ -201,10 +221,10 @@ class GraphicGenerator:
         plt.scatter(dataset['dimention'],error_linear, label = "lineare", s=100)
         plt.scatter(dataset['dimention'],error_asc, label = "ascesa duale", s=150)
 
-        plt.xlabel("Variabili decisionali")
-        plt.ylabel("Errori relativi")
-        plt.title("Errori commessi")
-        plt.legend()
+        plt.xlabel("Variabili decisionali",fontsize=20)
+        plt.ylabel("Errori relativi",fontsize=20)
+        plt.title("Errori commessi",fontsize=20)
+        plt.legend(fontsize=15)
         plt.grid()
 
         fig.savefig("Img/CFL/plot_error.png", format="png")

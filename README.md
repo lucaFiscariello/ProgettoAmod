@@ -8,8 +8,9 @@ Problemi da analizzare
 
 
 Obiettivi
-- Per entrambi i problemi si calcola la soluzione ottima e la si confronta con  2 lower  bound ottenuti con tecniche diverse e con una soluzione euristica ottenuta con l’algoritmo di ascesa duale.
-- In più si vuole osservare quale è il più grande problema che riesce a risolvere in x minuti (da stabilire ancora) per ciascuna delle 8 versioni del problema(capacitato-pli , capacitato rilassato , capacitato-ascesa duale .. ecc)
+- Per entrambi i problemi si calcola la soluzione ottima e la si confronta con  2 lower  bound ottenuti con tecniche diverse;
+- Confrontare soluzione euristica ottenuta con l’algoritmo di ascesa duale con la soluzione ottima;
+
 
 
 I lower  bound sono  individuati con 
@@ -31,23 +32,23 @@ ad ogni esecuzione calcolo
 - soluzione dell'algoritmo di ascesa duale
 
 
-Grafici da creare
-- creo grafico in cui mostro come variano le soluzioni al variare delle dimensioni.
-- creo grafico in cui mostro come variano gli errori relativi al variare delle dimensioni.
-- creo grafico in cui mostro come tempi di esecuzione variano al variare delle dimensioni. 
-- Creo grafico in cui mostro come rapporto tra tempo di esecuzione e dimensione varia al variare delle dimensioni ( all’aumento dei run di esecuzione)
-- mettere a confronto grafici della soluzione capacitata con quella non capacitata
-- grafico che confronta tempi e dimensioni del problema in x minuti di esecuzione(da stabilire)
+Grafici creati
+- grafico in cui mostro come variano le soluzioni al variare delle dimensioni.
+- grafico in cui mostro come variano gli errori relativi al variare delle dimensioni.
+- grafico in cui mostro come tempi di esecuzione variano al variare delle dimensioni. 
+- grafico in cui mostro come rapporto tra tempo di esecuzione e dimensione varia al variare delle dimensioni ( all’aumento dei run di esecuzione)
+- Boxplot
+
 
 
 ## Parte implementativa
-Verrà utilizzato python sfruttando l’API offerta da Gurobi.
+Il progetto verrà implementato in python sfruttando l’API offerta da Gurobi.
 
-Classi da creare
-
-- Classe che modella problema di facility location capacitato
+Classi create piu significative:
 
 - Classe che modella problema di facility location capacitato
+
+- Classe che modella problema di facility location non capacitato
 
 - Classe Solver che prevede una serie di metodi:
   1. metodo per calcolare soluzione ottima

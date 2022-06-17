@@ -1,4 +1,6 @@
 from Util.ChronoMeter import ChronoMeter
+from Util.ParamGenerator import ParamGenerator
+
 
 def get_optimal(fl):
     chrono = ChronoMeter()
@@ -26,29 +28,50 @@ def get_lb_linear(fl):
 
     return solution_optimal, execution_time
 
-def get_lb_lagrange_UFL(fl, lambda_moltiplicator):
+def get_lb_lagrange_UFL(fl, number_param):
     chrono = ChronoMeter()
-    relax_model = fl.get_lagragian_relax_model(lambda_moltiplicator)
+    generator = ParamGenerator(12345, 5)
+    solutions = []
+    times = []
 
-    chrono.start_chrono()
-    relax_model.optimize()
-    chrono.stop_chrono()
+    for i in range(20):
 
-    solution_optimal = relax_model.ObjVal
-    execution_time = chrono.get_execution_time()
+        lambda_param = generator.get_param_lambda(number_param)
+        relax_model = fl.get_lagragian_relax_model(lambda_param)
+
+        chrono.start_chrono()
+        relax_model.optimize()
+        chrono.stop_chrono()
+
+        solutions.append(relax_model.ObjVal)
+        times.append(chrono.get_execution_time())
+
+    solution_optimal = max(solutions)
+    pos_max = solutions.index(solution_optimal)
+    execution_time = times[pos_max]
 
     return solution_optimal, execution_time
 
-def get_lb_lagrange_CFL(fl, lambda_moltiplicator):
+def get_lb_lagrange_CFL(fl, number_param):
     chrono = ChronoMeter()
-    relax_model = fl.get_lagragian_relax_model(lambda_moltiplicator)
+    generator = ParamGenerator(12345, 5)
+    solutions = []
+    times = []
 
-    chrono.start_chrono()
-    relax_model.optimize()
-    chrono.stop_chrono()
+    for i in range(20):
+        lambda_param = generator.get_param_lambda(number_param)
+        relax_model = fl.get_lagragian_relax_model(lambda_param)
 
-    solution_optimal = relax_model.ObjVal
-    execution_time = chrono.get_execution_time()
+        chrono.start_chrono()
+        relax_model.optimize()
+        chrono.stop_chrono()
+
+        solutions.append(relax_model.ObjVal)
+        times.append(chrono.get_execution_time())
+
+    solution_optimal = max(solutions)
+    pos_max = solutions.index(solution_optimal)
+    execution_time = times[pos_max]
 
     return solution_optimal, execution_time
 

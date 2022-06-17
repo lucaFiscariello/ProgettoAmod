@@ -1,5 +1,6 @@
 import unittest
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from Model.ModelCFL import ModelCFL
@@ -26,15 +27,13 @@ class MyTestCase(unittest.TestCase):
         generator.generate_linear_ufl()
 
     def test_lagrange_ufl(self):
-        param_generator = ParamGenerator(1234, 5)
         initial_number_client = 5
         initial_number_facility = 6
-        lambda_multiplicand = param_generator.get_param_lambda(initial_number_facility * initial_number_client)
 
         generator = TestGeneratorUFL(run_number=40, seed=12345, initial_number_client=5, initial_number_facility=6,
                                      initial_cost_f=2000000, initial_cost_t=500000)
 
-        generator.generate_lagrange_ufl(lambda_multiplicand)
+        generator.generate_lagrange_ufl(initial_number_client*initial_number_facility)
 
     def test_ascent_ufl(self):
         generator = TestGeneratorUFL(run_number=40, seed=12345, initial_number_client=5, initial_number_facility=6,
@@ -55,16 +54,14 @@ class MyTestCase(unittest.TestCase):
         generator.generate_linear_cfl()
 
     def test_lagrange_cfl(self):
-        param_generator = ParamGenerator(1234, 5)
         initial_number_client = 5
         initial_number_facility = 6
-        lambda_multiplicand = param_generator.get_param_lambda(initial_number_facility * initial_number_client)
 
         generator = TestGeneratorCFL(run_number=40, seed=12345, initial_number_client=5, initial_number_facility=6,
                                      initial_cost_f=2000000, initial_cost_t=500000, initial_capacity=200,
                                      initial_demand=50)
 
-        generator.generate_lagrange_cfl(lambda_multiplicand)
+        generator.generate_lagrange_cfl(initial_number_client*initial_number_facility)
 
     def test_ascent_cfl(self):
         generator = TestGeneratorCFL(run_number=40, seed=12345, initial_number_client=5, initial_number_facility=6,

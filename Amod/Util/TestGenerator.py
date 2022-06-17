@@ -62,7 +62,7 @@ class TestGeneratorUFL:
         df = pd.DataFrame(list(zip(solutions, times)), columns=['solutions linear', 'times linear'])
         df.to_csv("CSV/UFL/linear.csv")
 
-    def generate_lagrange_ufl(self, lambda_moltiplicator):
+    def generate_lagrange_ufl(self, number_param):
         generator = ParamGenerator(self.seed, self.stream)
         max_fixed_cost = self.initial_cost_f
         max_trans_cost = self.initial_cost_t
@@ -77,7 +77,7 @@ class TestGeneratorUFL:
             trans_costs = generator.get_allocation_cost(max_trans_cost, number_clients*number_facility)
             model = ModelUFL(fixed_costs, trans_costs)
 
-            solution, time = Solver.get_lb_lagrange_UFL(model, lambda_moltiplicator)
+            solution, time = Solver.get_lb_lagrange_UFL(model, number_param)
 
             solutions.append(solution)
             times.append(time)
@@ -176,7 +176,7 @@ class TestGeneratorCFL:
         df = pd.DataFrame(list(zip(solutions, times)), columns=['solutions linear', 'times linear'])
         df.to_csv("CSV/CFL/linear.csv")
 
-    def generate_lagrange_cfl(self, lambda_moltiplicator):
+    def generate_lagrange_cfl(self, number_param):
         generator = ParamGenerator(self.seed, self.stream)
         max_fixed_cost = self.initial_cost_f
         max_trans_cost = self.initial_cost_t
@@ -195,7 +195,7 @@ class TestGeneratorCFL:
             capacity = generator.get_facility_capacity(max_capacity, number_facility)
             model = ModelCFL(fixed_costs, trans_costs, demands, capacity)
 
-            solution, time = Solver.get_lb_lagrange_CFL(model, lambda_moltiplicator)
+            solution, time = Solver.get_lb_lagrange_CFL(model, number_param)
 
             solutions.append(solution)
             times.append(time)
