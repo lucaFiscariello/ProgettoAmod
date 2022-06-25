@@ -140,9 +140,9 @@ class GraphicGenerator:
         solution_linear = np.array(dataset['solutions linear'])
         solution_asc = np.array(dataset['solutions asc'])
 
-        error_lagrange = (solution_opt-solution_lgr)/solution_lgr
-        error_linear = (solution_opt-solution_linear)/solution_lgr
-        error_asc = (solution_asc-solution_opt)/solution_opt
+        error_lagrange = (solution_opt-solution_lgr)/solution_opt
+        error_linear = (solution_opt-solution_linear)/solution_opt
+        error_asc = (solution_opt-solution_asc)/solution_opt
 
         fig = plt.figure(figsize=[10, 15])
         plt.scatter(dataset['dimention'],error_lagrange, label = "lagrange", s=200)
@@ -212,9 +212,9 @@ class GraphicGenerator:
         solution_linear = np.array(dataset['solutions linear'])
         solution_asc = np.array(dataset['solutions asc'])
 
-        error_lagrange = (solution_opt-solution_lgr)/solution_lgr
-        error_linear = (solution_opt-solution_linear)/solution_lgr
-        error_asc = (solution_asc-solution_opt)/solution_opt
+        error_lagrange = (solution_opt-solution_lgr)/solution_opt
+        error_linear = (solution_opt-solution_linear)/solution_opt
+        error_asc = (solution_opt-solution_asc)/solution_opt
 
         fig = plt.figure(figsize=[10, 15])
         plt.scatter(dataset['dimention'],error_lagrange, label = "lagrange", s=200)

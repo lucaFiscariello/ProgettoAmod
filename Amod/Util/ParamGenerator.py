@@ -19,5 +19,11 @@ class ParamGenerator:
     def get_facility_capacity(self, max_value, number_facility):
         return self.streams[3].integers(1, max_value, number_facility)
 
+    """
+        :param number: parametri da generare
+        :type number: int
+    """
     def get_param_lambda(self, number):
-        return self.streams[4].integers(1, 10, number)
+        vet = self.streams[4].integers(1,30,number)
+        print(vet)
+        return vet

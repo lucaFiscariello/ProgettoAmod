@@ -1,6 +1,4 @@
 import unittest
-
-import matplotlib.pyplot as plt
 import pandas as pd
 
 from Model.ModelCFL import ModelCFL
@@ -72,7 +70,6 @@ class MyTestCase(unittest.TestCase):
 
     def test_complex_ufl(self):
         generator = ParamGenerator(12345, 5)
-        param_generator = ParamGenerator(1234, 5)
 
         max_fixed_cost = 2000000
         max_trans_cost = 500000
@@ -92,12 +89,11 @@ class MyTestCase(unittest.TestCase):
         while number_facility < 45:
             fixed_costs = generator.get_setup_cost(max_fixed_cost, number_facility)
             trans_costs = generator.get_allocation_cost(max_trans_cost, number_clients * number_facility)
-            lambda_multiplicand = param_generator.get_param_lambda(number_clients * number_facility)
             model = ModelUFL(fixed_costs, trans_costs)
 
             solution_opt, time_opt = Solver.get_optimal(model)
             solution_linear, time_linear = Solver.get_lb_linear(model)
-            solution_lgr, time_lgr = Solver.get_lb_lagrange_UFL(model, lambda_multiplicand)
+            solution_lgr, time_lgr = Solver.get_lb_lagrange_UFL(model, number_clients * number_facility)
             solution_asc, time_asc = Solver.get_ascent_dual_UFL(model)
 
             solutions_opt.append(solution_opt)
@@ -120,7 +116,6 @@ class MyTestCase(unittest.TestCase):
 
     def test_complex_cfl(self):
         generator = ParamGenerator(12345, 5)
-        param_generator = ParamGenerator(1234, 5)
 
         max_fixed_cost = 2000000
         max_trans_cost = 500000
@@ -144,12 +139,11 @@ class MyTestCase(unittest.TestCase):
             trans_costs = generator.get_allocation_cost(max_trans_cost, number_clients * number_facility)
             demands = generator.get_client_demand(max_demand, number_clients)
             capacity = generator.get_facility_capacity(max_capacity, number_facility)
-            lambda_multiplicand = param_generator.get_param_lambda(number_clients * number_facility)
             model = ModelCFL(fixed_costs, trans_costs, demands, capacity)
 
             solution_opt, time_opt = Solver.get_optimal(model)
             solution_linear, time_linear = Solver.get_lb_linear(model)
-            solution_lgr, time_lgr = Solver.get_lb_lagrange_CFL(model, lambda_multiplicand)
+            solution_lgr, time_lgr = Solver.get_lb_lagrange_CFL(model, number_clients * number_facility)
             solution_asc, time_asc = Solver.get_ascent_dual_CFL(model)
 
             solutions_opt.append(solution_opt)

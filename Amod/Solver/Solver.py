@@ -1,5 +1,5 @@
-from Util.ChronoMeter import ChronoMeter
-from Util.ParamGenerator import ParamGenerator
+from Amod.Util.ChronoMeter import ChronoMeter
+from Amod.Util.ParamGenerator import ParamGenerator
 
 
 def get_optimal(fl):
@@ -34,21 +34,21 @@ def get_lb_lagrange_UFL(fl, number_param):
     solutions = []
     times = []
 
+    chrono.start_chrono()
     for i in range(20):
 
         lambda_param = generator.get_param_lambda(number_param)
         relax_model = fl.get_lagragian_relax_model(lambda_param)
 
-        chrono.start_chrono()
         relax_model.optimize()
-        chrono.stop_chrono()
 
         solutions.append(relax_model.ObjVal)
         times.append(chrono.get_execution_time())
 
+    chrono.stop_chrono()
+
     solution_optimal = max(solutions)
-    pos_max = solutions.index(solution_optimal)
-    execution_time = times[pos_max]
+    execution_time = chrono.get_execution_time()
 
     return solution_optimal, execution_time
 
@@ -58,20 +58,19 @@ def get_lb_lagrange_CFL(fl, number_param):
     solutions = []
     times = []
 
+    chrono.start_chrono()
     for i in range(20):
         lambda_param = generator.get_param_lambda(number_param)
         relax_model = fl.get_lagragian_relax_model(lambda_param)
 
-        chrono.start_chrono()
         relax_model.optimize()
-        chrono.stop_chrono()
 
         solutions.append(relax_model.ObjVal)
         times.append(chrono.get_execution_time())
 
+    chrono.stop_chrono()
     solution_optimal = max(solutions)
-    pos_max = solutions.index(solution_optimal)
-    execution_time = times[pos_max]
+    execution_time = chrono.get_execution_time()
 
     return solution_optimal, execution_time
 
@@ -79,12 +78,10 @@ def get_lb_lagrange_CFL(fl, number_param):
 def get_ascent_dual_UFL(fl):
     chrono = ChronoMeter()
     w, z, c, f = fl.get_param_dual()
-    delta = []
-    z_final = []
 
     chrono.start_chrono()
 
-    #Inizializzo zv al minimo di cuv scorrendo tutte le u
+    # Inizializzo zv al minimo di cuv scorrendo tutte le u
     for v in range(len(c[0])):
         temp = []
         for u in range(len(c)):
@@ -100,28 +97,17 @@ def get_ascent_dual_UFL(fl):
 
         w.append(temp)
 
-    sum_w = 0
-    for k in range(len(w)):
-        sum_w = sum_w + sum(w[k])
-
-    #calcolo deltauv
-    for u in range(len(c)):
-        temp = []
-        for v in range(len(c[0])):
-            temp.append(f[v] - (sum_w - w[u][v]))
-        delta.append(temp)
-
-    #trovo valori finali di zv come il minimo z[v] + delta[u][v] scorrendo le u
+    # trovo valori finali di zv come il minimo z[v] + delta[u][v] scorrendo le u
     for v in range(len(c[0])):
         temp = []
         for u in range(len(c)):
-            temp.append(z[v] + delta[u][v])
+            temp.append(c[u][v] + f[u] - sum([max(0,z[v]-w[u][i]) for i in range(len(c[0]))])+max(0,z[v]-c[u][v]))
 
-        z_final.append(min(temp))
+        z[v]=min(temp)
 
     chrono.stop_chrono()
 
-    solution_optimal = sum(z_final)
+    solution_optimal = sum(z)
     execution_time = chrono.get_execution_time()
 
     return solution_optimal, execution_time
@@ -143,14 +129,10 @@ def get_ascent_dual_CFL(fl):
     #trovo valori finali di lv come c[u][v] + f[u] in corrispondenza del minimo c[u][v] + delta[u][v] scorrendo le u
     for v in range(len(c[0])):
         temp = []
-        temp_l = []
         for u in range(len(c)):
             temp.append(c[u][v] + delta[u][v])
-            temp_l.append(c[u][v] + f[u])
 
-        min_value = min(temp)
-        min_pos = temp.index(min_value)
-        l_final.append(temp_l[min_pos])
+        l_final.append(min(temp))
 
     chrono.stop_chrono()
 
@@ -158,4 +140,5 @@ def get_ascent_dual_CFL(fl):
     execution_time = chrono.get_execution_time()
 
     return solution_optimal, execution_time
+
 
