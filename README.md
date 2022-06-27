@@ -8,15 +8,15 @@ Problemi da analizzare
 
 
 Obiettivi
-- Per entrambi i problemi si calcola la soluzione ottima e la si confronta con  2 lower  bound ottenuti con tecniche diverse;
-- Confrontare soluzione euristica ottenuta con l’algoritmo di ascesa duale con la soluzione ottima;
+- Per entrambi i problemi si calcola la soluzione ottima e la si confronta con  3 lower  bound ottenuti con tecniche diverse;
+- implementare algoritmo di ascesa duale;
 
 
 
 I lower  bound sono  individuati con 
 - rilassamento lineare
 - rilassamento lagrangiano ( si provano più valori del moltiplicatore )
- 
+- algoritmo di ascesa duale
  
 Il confronto tra le soluzione individuate con le varie tecniche riguarda
 - Vicinanza alla soluzione ottima del pli ( errore relativo)
