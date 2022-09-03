@@ -19,11 +19,17 @@ class ParamGenerator:
     def get_facility_capacity(self, max_value, number_facility):
         return self.streams[3].integers(1, max_value, number_facility)
 
-    """
-        :param number: parametri da generare
-        :type number: int
-    """
+    def get_setup_cost_normal(self, mean, var, number_facility):
+        return abs(self.streams[0].normal(mean, var, number_facility))
+
+    def get_allocation_cost_normal(self, mean, var, number_allocation):
+        return abs(self.streams[1].normal(mean, var, number_allocation))
+
+    def get_client_demand_normal(self, mean, var, number_client):
+        return abs(self.streams[2].normal(mean, var, number_client))
+
+    def get_facility_capacity_normal(self, mean, var, number_facility):
+        return abs(self.streams[3].normal(mean, var, number_facility))
+
     def get_param_lambda(self, number):
-        vet = self.streams[4].integers(1,30,number)
-        print(vet)
-        return vet
+        return self.streams[4].normal(0,1,number)

@@ -1,0 +1,13 @@
+{
+  "client >> facility" : { "number_client" : 80, "number_facility" : 10 },
+  "client == facility" : { "number_client" : 40, "number_facility" : 40 },
+  "trans == setup" : { "mean_trans" : 10000, "mean_setup" : 10000 },
+  "trans << setup" : { "mean_trans" : 1000, "mean_setup" : 10000 },
+  "default_var_trans" : 1000,
+  "default_var_setup" : 1000,
+  "var_capacity" : { "high" : 10, "low" : 1000 },
+  "var_demand"   : { "high" : 10, "low" : 1000 },
+  "default_mean_capacity" : 10000,
+  "default_mean_demand" : 10000,
+  "ratio_capacity_demand" : {"high": 0.05 , "low": 0.0001}
+}
