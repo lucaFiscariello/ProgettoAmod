@@ -4,18 +4,18 @@
 
 Problemi da analizzare
 - Facility location capacitato
-- Facility location non capacitato
 
 
 Obiettivi
 - Per entrambi i problemi si calcola la soluzione ottima e la si confronta con  3 lower  bound ottenuti con tecniche diverse;
-- implementare algoritmo di ascesa duale;
+- implementazione algoritmo di ascesa duale;
+- implementazione metodo subgradiente
 
 
 
 I lower  bound sono  individuati con 
 - rilassamento lineare
-- rilassamento lagrangiano ( si provano più valori del moltiplicatore )
+- rilassamento lagrangiano
 - algoritmo di ascesa duale
  
 Il confronto tra le soluzione individuate con le varie tecniche riguarda
@@ -33,10 +33,10 @@ ad ogni esecuzione calcolo
 
 
 Grafici creati
-- grafico in cui mostro come variano le soluzioni al variare delle dimensioni.
-- grafico in cui mostro come variano gli errori relativi al variare delle dimensioni.
-- grafico in cui mostro come tempi di esecuzione variano al variare delle dimensioni. 
-- grafico in cui mostro come rapporto tra tempo di esecuzione e dimensione varia al variare delle dimensioni ( all’aumento dei run di esecuzione)
+- grafico in cui è mostrato come variano le soluzioni al variare delle dimensioni.
+- grafico in cui è mostrato come variano gli errori relativi al variare delle dimensioni.
+- grafico in cui è mostrato come i tempi di esecuzione variano al variare delle dimensioni. 
+- grafico in cui è mostrato come il rapporto tra tempo di esecuzione e dimensione varia al variare delle dimensioni ( all’aumento dei run di esecuzione)
 - Boxplot
 
 
@@ -48,7 +48,6 @@ Classi create piu significative:
 
 - Classe che modella problema di facility location capacitato
 
-- Classe che modella problema di facility location non capacitato
 
 - Classe Solver che prevede una serie di metodi:
   1. metodo per calcolare soluzione ottima
